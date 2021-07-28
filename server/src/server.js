@@ -3,7 +3,8 @@ import * as typeorm from "typeorm";
 import app from "./app.js";
 
 import Post from "./models/Post.js";
-import PostSchema from "./models/schemas/PostSchema.js";
+
+import { ormconfig } from "../ormconfig.js";
 
 class Server {
   constructor(app) {
@@ -16,13 +17,18 @@ class Server {
     this.db = connection;
     console.log("DB 연결");
 
-    this.app.listen(4000, () => {
-      console.log("server run");
+    const port = process.env.PORT || 4000;
+
+    this.app.listen(port, (err) => {
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      }
+      console.log("server run PORT :", port);
     });
   }
 
   async test(post) {
-    console.log(this.db);
     const postRepository = this.db.getRepository(Post);
     const savedPost = await postRepository.save(post);
     console.log("Post has been saved: ", savedPost);
@@ -34,25 +40,12 @@ class Server {
 
 const server = new Server(app);
 
-typeorm
-  .createConnection({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "159753",
-    database: "testDB",
-    synchronize: true,
-    logging: false,
-    entities: [PostSchema],
-  })
-  .then(async (connection) => {
-    const post = new Post();
-    post.title = "test1";
+typeorm.createConnection(ormconfig).then(async (connection) => {
+  const post = new Post();
+  post.title = "test1";
 
-    await server.run(connection);
-    server.test(post);
-  });
+  await server.run(connection);
+});
 
 export { server };
 
