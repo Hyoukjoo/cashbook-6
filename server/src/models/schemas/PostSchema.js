@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import Post from "../models/Post.js";
+import Post from "../Post.js";
 
 export default new EntitySchema({
   name: "Post",

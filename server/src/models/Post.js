@@ -1,5 +1,5 @@
 export default class Post {
-  constructor(id, title, text, categories) {
+  constructor(id, title) {
     this.id = id;
     this.title = title;
   }
