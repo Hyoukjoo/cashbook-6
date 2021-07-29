@@ -2,7 +2,7 @@ import * as typeorm from "typeorm";
 
 import app from "./app.js";
 
-import Post from "./models/Post/model.js";
+import Test from "./models/Test/model.js";
 
 import { ormconfig } from "../ormconfig.js";
 
@@ -10,7 +10,6 @@ class Server {
   constructor(app) {
     this.app = app;
     this.run.bind(this);
-    this.test.bind(this);
   }
 
   async run(connection) {
@@ -27,26 +26,15 @@ class Server {
       console.log("server run PORT :", port);
     });
   }
-
-  async test(post) {
-    const postRepository = this.db.getRepository(Post);
-    const savedPost = await postRepository.save(post);
-    console.log("Post has been saved: ", savedPost);
-
-    const allPosts = await postRepository.find();
-    console.log(allPosts);
-  }
 }
 
 const server = new Server(app);
 
 typeorm.createConnection(ormconfig).then(async (connection) => {
-  const post = new Post();
+  const post = new Test();
   post.title = "test1";
 
   await server.run(connection);
 });
 
 export { server };
-
-// model -> respository -> controller -> route

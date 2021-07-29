@@ -1,4 +1,4 @@
-import PostSchema from "./src/models/Post/schema.js";
+import PostSchema from "./src/models/Test/schema.js";
 
 export const ormconfig = {
   type: "postgres",

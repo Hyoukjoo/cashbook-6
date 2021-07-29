@@ -1,9 +1,9 @@
 import { EntitySchema } from "typeorm";
-import Post from "./model.js";
+import Test from "./model.js";
 
 export default new EntitySchema({
-  name: "Post",
-  target: Post,
+  name: "Test",
+  target: Test,
   columns: {
     id: {
       primary: true,
