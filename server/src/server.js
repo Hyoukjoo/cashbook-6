@@ -2,7 +2,7 @@ import * as typeorm from "typeorm";
 
 import app from "./app.js";
 
-import Post from "./models/Post.js";
+import Post from "./models/Post/model.js";
 
 import { ormconfig } from "../ormconfig.js";
 
