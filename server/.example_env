@@ -1,0 +1,6 @@
+# port
+PORT=3000
+DB_PORT=5432
+
+# mode
+NODE_ENV=development
