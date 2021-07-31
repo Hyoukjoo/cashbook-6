@@ -1,10 +1,4 @@
-import * as typeorm from "typeorm";
-
 import app from "./app.js";
-
-import Test from "./models/Test/model.js";
-
-import { ormconfig } from "../ormconfig.js";
 
 class Server {
   constructor(app) {
@@ -12,10 +6,7 @@ class Server {
     this.run.bind(this);
   }
 
-  async run(connection) {
-    this.db = connection;
-    console.log("DB 연결");
-
+  async run() {
     const port = process.env.PORT || 4000;
 
     this.app.listen(port, (err) => {
@@ -29,12 +20,4 @@ class Server {
 }
 
 const server = new Server(app);
-
-typeorm.createConnection(ormconfig).then(async (connection) => {
-  const post = new Test();
-  post.title = "test1";
-
-  await server.run(connection);
-});
-
-export { server };
+server.run();
