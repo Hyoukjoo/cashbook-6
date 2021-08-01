@@ -1,4 +1,5 @@
-import PostSchema from "./src/models/Test/schema.js";
+import TestSchema from "./src/models/Test/schema.js";
+import UsersSchema from "./src/models/Users/schema.js";
 
 export const ormconfig = {
   type: "postgres",
@@ -9,5 +10,5 @@ export const ormconfig = {
   database: "testDB",
   synchronize: true,
   logging: false,
-  entities: [PostSchema],
+  entities: [TestSchema, UsersSchema],
 };
