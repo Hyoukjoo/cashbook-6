@@ -13,6 +13,9 @@ export default new EntitySchema({
     email: {
       type: "varchar",
     },
+    github_id: {
+      type: "varchar",
+    },
     github_oauth_token: {
       type: "varchar",
     },
