@@ -7,7 +7,7 @@ class Server {
   }
 
   async run() {
-    const port = process.env.PORT || 4000;
+    const port = process.env.PORT || 3000;
 
     this.app.listen(port, (err) => {
       if (err) {
