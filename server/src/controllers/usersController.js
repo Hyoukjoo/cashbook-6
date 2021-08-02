@@ -1,37 +1,33 @@
-import { SimpleConsoleLogger } from "typeorm";
+import fetch from "node-fetch";
+
 import { usersRepository } from "../repositories/usersRepository.js";
+import config from "../config/index.js";
 
 export const usersController = {
-  signup: async (req, res, next) => {
-    const email = req.body.email;
-    const github_oauth_token = req.body.github_oauth_token;
-    const user = await usersRepository.getUser(email);
-    if (user != null) {
-      res.send("already existing email address");
-      return;
-    }
-
-    await usersRepository.signup(email, github_oauth_token);
-    res.send("signup success");
+  loginGithub: async (req, res, next) => {
+    const url = `https://github.com/login/oauth/authorize?client_id=${config.github_client_id}&redirect_uri=http://localhost:3000/users/login/github/callback`;
+    res.redirect(url);
   },
 
-  login: async (req, res, next) => {
-    const email = req.body.email;
-    const github_oauth_token = req.body.github_oauth_token;
+  loginGithubCallback: async (req, res, next) => {
+    const code = req.query.code;
+    const access_token = await getAccessToken(code);
+    const githubData = await getGithubUser(access_token);
 
-    const user = await usersRepository.getUser(email);
+    const user = await usersRepository.getUser(githubData.id);
+
     if (user == null) {
-      res.send("존재하지 않는 이메일입니다.");
-      return;
-    } else if (user.github_oauth_token !== github_oauth_token) {
-      res.send("oauth 토큰이 만료되었습니다.");
-      return;
+      // db 에 user 가 존재하지 않으면 회원가입
+      const githubId = githubData.id;
+      const githubEmail = await getGithubUserEmail(access_token);
+      await signupWithGithub(githubId, githubEmail);
     }
 
-    /* 토큰 발급 */
-    //
-    //
-    res.send("로그인 성공");
+    // db 에 access token 등록
+    await usersRepository.updateGithubOauthToken(githubData.id, access_token);
+
+    // 클라이언트에게 access token 전송
+    res.json({ access_token });
   },
 
   getUsers: async (req, res, next) => {
@@ -39,10 +35,19 @@ export const usersController = {
     res.json(allUsers);
   },
 
-  deleteUser: async (req, res, next) => {
+  deleteUserByEmail: async (req, res, next) => {
     const email = req.body.email;
-    const deleteResult = await usersRepository.deleteUser(email);
-    console.log(deleteResult);
+    const deleteResult = await usersRepository.deleteUserByEmail(email);
+    if (deleteResult) {
+      res.json("deleted");
+    } else {
+      res.json("delete fail. nonexisting email address");
+    }
+  },
+
+  deleteUserByGithubId: async (req, res, next) => {
+    const githubId = req.body.github_id;
+    const deleteResult = await usersRepository.deleteUserByGithubId(githubId);
     if (deleteResult) {
       res.json("deleted");
     } else {
@@ -50,3 +55,52 @@ export const usersController = {
     }
   },
 };
+
+async function signupWithGithub(githubId, githubEmail) {
+  await usersRepository.signup(githubEmail, githubId);
+}
+
+async function getGithubUserEmail(access_token) {
+  const req = await fetch("https://api.github.com/user/public_emails", {
+    method: "GET",
+    headers: {
+      Authorization: `token ${access_token}`,
+    },
+  });
+  const emailList = await req.json();
+  if (emailList == null || emailList.length === 0) return false;
+
+  for (const data of emailList) {
+    if (data.primary) return data.email;
+  }
+
+  return false;
+}
+
+async function getGithubUser(access_token) {
+  const req = await fetch("https://api.github.com/user", {
+    headers: {
+      Authorization: `bearer ${access_token}`,
+    },
+  });
+  const data = await req.json();
+  return data;
+}
+
+async function getAccessToken(code) {
+  const res = await fetch("https://github.com/login/oauth/access_token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      client_id: config.github_client_id,
+      client_secret: config.github_client_secret,
+      code: code,
+    }),
+  });
+  const data = await res.text();
+  const params = new URLSearchParams(data);
+
+  return params.get("access_token");
+}

@@ -6,26 +6,50 @@ export const usersRepository = {
   getAll: async () => {
     const connection = database.connection.getRepository(Users);
     const user = await connection.find();
-    console.log(user);
 
     return user;
   },
 
-  signup: async (email, github_oauth_token) => {
+  signup: async (email, github_oauth_id) => {
     const connection = database.connection.getRepository(Users);
-    const savedUser = await connection.save({ email, github_oauth_token });
-
-    console.log(savedUser);
+    const savedUser = await connection.save({
+      email,
+      github_oauth_id,
+      github_oauth_token: "",
+    });
   },
 
-  getUser: async (email) => {
+  updateGithubOauthToken: async (github_oauth_id, github_oauth_token) => {
     const connection = database.connection.getRepository(Users);
-    return await connection.findOne({ where: { email: email } });
+    const user = await connection.findOne({
+      where: { github_oauth_id, github_oauth_id },
+    });
+
+    user.github_oauth_token = github_oauth_token;
+    const savedUser = await connection.save(user);
   },
 
-  deleteUser: async (email) => {
+  getUser: async (id) => {
+    const connection = database.connection.getRepository(Users);
+    return await connection.findOne({ where: { id: id } });
+  },
+
+  deleteUserByEmail: async (email) => {
     const connection = database.connection.getRepository(Users);
     const deleteResult = await connection.delete({ email: email });
+
+    if (deleteResult.affected == null || deleteResult.affected === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+
+  deleteUserByGithubId: async (github_oauth_id) => {
+    const connection = database.connection.getRepository(Users);
+    const deleteResult = await connection.delete({
+      github_oauth_id: github_oauth_id,
+    });
 
     if (deleteResult.affected == null || deleteResult.affected === 0) {
       return false;

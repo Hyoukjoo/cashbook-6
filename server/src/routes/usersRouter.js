@@ -3,9 +3,10 @@ import { usersController } from "../controllers/usersController.js";
 
 const usersRouter = Router();
 
-usersRouter.post("/signup", usersController.signup);
-usersRouter.post("/login", usersController.login);
-usersRouter.delete("/", usersController.deleteUser);
+usersRouter.get("/login/github", usersController.loginGithub);
+usersRouter.get("/login/github/callback", usersController.loginGithubCallback);
+usersRouter.delete("/email", usersController.deleteUserByEmail);
+usersRouter.delete("/github_id", usersController.deleteUserByGithubId);
 usersRouter.get("/all", usersController.getUsers);
 
 export default usersRouter;

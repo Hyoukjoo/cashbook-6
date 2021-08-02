@@ -4,8 +4,6 @@ import Post from "../models/Test/model.js";
 
 export const testRepository = {
   testPost: async (title) => {
-    // const post = new Post();  // 체크 할 것 : 이렇게 명시적으로 모델 객체를 안써도
-    // post.title = title;       // 그냥 객체만 써도 잘됨.
     const postRepository = database.connection.getRepository(Post);
     const savedPost = await postRepository.save({ title });
     console.log(savedPost);
