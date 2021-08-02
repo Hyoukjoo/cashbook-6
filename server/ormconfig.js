@@ -6,7 +6,7 @@ export const ormconfig = {
   host: "localhost",
   port: process.env.DB_PORT || 5432,
   username: "postgres",
-  password: "159753",
+  password: process.env.DB_PASSWORD || "159753",
   database: "testDB",
   synchronize: true,
   logging: false,
