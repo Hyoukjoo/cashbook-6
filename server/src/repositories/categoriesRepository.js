@@ -11,6 +11,13 @@ export const categoriesRepository = {
     });
   },
 
+  getCategoryById: async (categoryId) => {
+    const connection = database.connection.getRepository(Categories);
+    return await connection.findOne({
+      id: categoryId,
+    });
+  },
+
   getCategoryByName: async (categoryName) => {
     const connection = database.connection.getRepository(Categories);
     return await connection.findOne({

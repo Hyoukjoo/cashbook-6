@@ -13,6 +13,13 @@ export const categoriesController = {
       res.json("이미 존재하는 category 입니다.");
     }
   },
+
+  getCategoryById: async (req, res, next) => {
+    const categortId = req.params.id;
+    const category = await categoriesRepository.getCategoryById(categortId);
+    res.json({ category });
+  },
+
   getCategories: async (req, res, next) => {
     const categoryList = await categoriesRepository.getCategories();
 
