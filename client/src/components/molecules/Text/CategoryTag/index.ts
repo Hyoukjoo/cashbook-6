@@ -5,9 +5,9 @@ import { CategoryTagProps } from "../type";
 
 const CategoryTag: Molecule<CategoryTagProps, HtmlTextElement> = ({
   color,
-  text,
+  name,
 }) => {
-  const $span = Span("category-tag")(text);
+  const $span = Span("category-tag")(name);
 
   $span.style.backgroundColor = color;
 
