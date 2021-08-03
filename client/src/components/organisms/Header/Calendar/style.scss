@@ -1,0 +1,38 @@
+div.header-calendar {
+  display: grid;
+  grid-template-areas:
+    "left month right"
+    "left year right";
+  justify-self: center;
+  width: 100%;
+  height: 100%;
+
+  & > * {
+    margin: 0;
+  }
+}
+
+p.month {
+  grid-area: month;
+  justify-self: center;
+  line-height: 60px;
+  color: var(--color-off-white);
+  margin-bottom: 20px;
+}
+
+p.year {
+  grid-area: year;
+  justify-self: center;
+  line-height: 30px;
+  color: var(--color-off-white);
+}
+
+button.left {
+  grid-area: left;
+  justify-self: left;
+}
+
+button.right {
+  grid-area: right;
+  justify-self: right;
+}
