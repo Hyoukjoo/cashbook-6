@@ -1,3 +1,7 @@
 :root {
-  --size-max-width: 904px;
+  --size-max-width: 900px;
+
+  --size-header-height: 194px;
+
+  --size-container-height: calc(100vh - var(--size-header-height));
 }

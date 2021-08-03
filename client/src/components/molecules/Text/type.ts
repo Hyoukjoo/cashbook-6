@@ -1,3 +1,4 @@
+import { Category } from "apis/history/dto";
 import { TextAtom } from "atoms/Text/type";
 import { ClassName } from "commons/type/common";
 
@@ -23,6 +24,6 @@ export interface BoldTextProps extends TextProps {
   size?: BoldTextSize;
 }
 
-export interface CategoryTagProps extends Omit<TextProps, "TextAtom"> {
-  color: string;
-}
+export interface CategoryTagProps
+  extends Category,
+    Omit<TextProps, "TextAtom"> {}
