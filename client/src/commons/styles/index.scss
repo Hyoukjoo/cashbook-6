@@ -1,0 +1,16 @@
+@import "./colors.scss";
+@import "./fonts.scss";
+@import "./size.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: NotoSansKR;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+}

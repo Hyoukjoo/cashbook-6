@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "NotoSansKR";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../../public/fonts/NotoSans/NotoSansKR-Regular.woff2")
+      format("woff2"),
+    url("../../../public/fonts/NotoSans/NotoSansKR-Regular.woff") format("woff"),
+    url("../../../public/fonts/NotoSans/NotoSansKR-Regular.otf")
+      format("opentype");
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../../../public/fonts/NotoSans/NotoSansKR-Medium.woff2")
+      format("woff2"),
+    url("../../../public/fonts/NotoSans/NotoSansKR-Medium.woff") format("woff"),
+    url("../../../public/fonts/NotoSans/NotoSansKR-Medium.otf")
+      format("opentype");
+}
+
+@font-face {
+  font-family: "Dohyeon";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../../public/fonts/Dohyeon/Dohyeon.otf") format("opentype");
+}
