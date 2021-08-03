@@ -1,6 +1,7 @@
 import UsersSchema from "./src/models/Users/schema.js";
 import CategoriesSchema from "./src/models/Categories/schema.js";
 import PayMethodsSchema from "./src/models/PayMethods/schema.js";
+import CashbookHistoriesSchema from "./src/models/CashbookHistories/schema.js";
 
 export const ormconfig = {
   type: "postgres",
@@ -11,5 +12,10 @@ export const ormconfig = {
   database: "testDB",
   synchronize: true,
   logging: false,
-  entities: [UsersSchema, CategoriesSchema, PayMethodsSchema],
+  entities: [
+    UsersSchema,
+    CategoriesSchema,
+    PayMethodsSchema,
+    CashbookHistoriesSchema,
+  ],
 };
