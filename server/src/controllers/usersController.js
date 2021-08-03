@@ -52,7 +52,7 @@ export const usersController = {
 
   deleteUserByEmail: async (req, res, next) => {
     try {
-      const email = req.body.email;
+      const email = req.params.email;
       const deleteResult = await usersRepository.deleteUserByEmail(email);
       if (deleteResult) {
         res.json("deleted");
@@ -67,9 +67,9 @@ export const usersController = {
 
   deleteUserByGithubId: async (req, res, next) => {
     try {
-      const githubId = req.body.github_id;
+      const githubId = req.params.github_id;
       const deleteResult = await usersRepository.deleteUserByGithubId(githubId);
-      console.log(deleteResult);
+
       if (deleteResult) {
         res.json("deleted");
       } else {
