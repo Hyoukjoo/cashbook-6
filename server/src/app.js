@@ -18,6 +18,6 @@ app.use(
 
 app.use(logger(process.env.NODE_ENV === "development" ? "dev" : "combined"));
 
-app.use("/", router);
+app.use("/api", router);
 
 export default app;
