@@ -10,6 +10,13 @@ export const payMethodsRepository = {
     });
   },
 
+  getPayMethodById: async (methodId) => {
+    const connection = database.connection.getRepository(PayMethods);
+    return await connection.findOne({
+      id: methodId,
+    });
+  },
+
   getPayMethodByName: async (methodName) => {
     const connection = database.connection.getRepository(PayMethods);
     return await connection.findOne({

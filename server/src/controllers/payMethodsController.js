@@ -3,7 +3,6 @@ import { payMethodsRepository } from "../repositories/payMethodsRepository.js";
 export const payMethodsController = {
   add: async (req, res, next) => {
     const methodName = req.params.methodName;
-    console.log(req.params);
 
     const method = await payMethodsRepository.getPayMethodByName(methodName);
     if (method == null) {
@@ -13,6 +12,18 @@ export const payMethodsController = {
       res.json("이미 존재하는 method 입니다.");
     }
   },
+
+  getPayMethodById: async (req, res, next) => {
+    const methodId = req.params.id;
+
+    const method = await payMethodsRepository.getPayMethodById(methodId);
+    if (method == null) {
+      res.json({ method: null });
+    } else {
+      res.json({ method });
+    }
+  },
+
   getPayMethods: async (req, res, next) => {
     const methodList = await payMethodsRepository.getPayMethods();
 
