@@ -51,4 +51,17 @@
       line-height: 24px;
     }
   }
+
+  &.category-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    min-width: 92px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: center;
+    color: var(--color-white);
+    border-radius: 999px;
+  }
 }
