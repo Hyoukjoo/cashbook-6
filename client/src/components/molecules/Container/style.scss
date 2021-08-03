@@ -1,0 +1,17 @@
+main {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  width: 100vw;
+  height: var(--size-container-height);
+  background-color: var(--color-background);
+
+  & > section {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    width: 850px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+}
