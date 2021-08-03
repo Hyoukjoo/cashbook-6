@@ -1,13 +1,11 @@
 import { Page } from "pages/type";
 import applyDiff from "./applyDiff";
-import { clearChildren } from "./dom";
 import registry from "./registry";
 import { State } from "./state";
 
 export const renderWrapper =
   (page: Page) => (targetElement: HTMLElement, state: any) => {
-    const $new = clearChildren(targetElement);
-    const $element = page($new, state);
+    const $element = page(targetElement, state);
     const $childComponents = Array.from(
       $element.querySelectorAll<HTMLElement>("[data-page]")
     );
@@ -18,7 +16,7 @@ export const renderWrapper =
       const page = registry.get(name);
 
       if (page) {
-        target.replaceWith(page($new, state));
+        target.replaceWith(page(targetElement, state));
       }
     });
 
