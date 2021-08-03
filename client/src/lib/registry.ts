@@ -1,6 +1,7 @@
 import { Page } from "pages/type";
-import { cloneElement } from "./dom";
+import { clearChildren, cloneElement } from "./dom";
 import { renderWrapper } from "./render";
+import { Route, Routes } from "./routes";
 import { State } from "./state";
 
 class Registry {
@@ -10,12 +11,16 @@ class Registry {
     return this.store[name];
   }
 
-  add(name: string, page: Page) {
-    this.store[name] = renderWrapper(page);
+  add({ path, page }: Route) {
+    this.store[path] = renderWrapper(page);
+  }
+
+  set(routes: Routes) {
+    routes.forEach((route) => this.add(route));
   }
 
   renderRoot($root: HTMLElement, state: State) {
-    const $cloneRoot = cloneElement($root);
+    const $cloneRoot = clearChildren($root);
     const page = this.store[state.currentPath];
 
     return renderWrapper(page)($cloneRoot, state);

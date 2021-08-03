@@ -1,10 +1,20 @@
+import { Page } from "pages/type";
+
+import Calendar from "pages/Calendar";
+import Chart from "pages/Chart";
 import History from "pages/History";
-import { Routes } from "./type";
+
+export type Route = {
+  path: string;
+  page: Page;
+};
+
+export type Routes = Route[];
 
 const routes: Routes = [
   { path: "/", page: History },
-  { path: "/calendar", page: null },
-  { path: "/chart", page: null },
+  { path: "/calendar", page: Calendar },
+  { path: "/chart", page: Chart },
 ];
 
 export default routes;

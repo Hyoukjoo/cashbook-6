@@ -5,9 +5,11 @@ export const cloneElement = <T extends HTMLElement>(
 };
 
 export const clearChildren = (target: HTMLElement) => {
-  const $new = target.cloneNode(true) as HTMLElement;
+  const $new = cloneElement(target);
+
   while ($new.lastChild) {
     $new.lastChild.remove();
   }
+
   return $new;
 };
