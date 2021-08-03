@@ -5,8 +5,8 @@ export const categoriesController = {
     const categoryName = req.body.categoryName;
     const categoryColor = req.body.categoryColor;
 
-    const a = await categoriesRepository.getCategoryByName(categoryName);
-    if (a == null) {
+    const category = await categoriesRepository.getCategoryByName(categoryName);
+    if (category == null) {
       await categoriesRepository.addCategory(categoryName, categoryColor);
       res.json("category 등록 성공");
     } else {
@@ -28,7 +28,7 @@ export const categoriesController = {
     if (result) {
       res.json(`deleted ${categoryName}`);
     } else {
-      res.json("fail delete");
+      res.json(`fail delete method ${categoryName}`);
     }
   },
 };
