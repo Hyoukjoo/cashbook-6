@@ -22,7 +22,7 @@ export const usersRepository = {
   updateGithubOauthToken: async (github_oauth_id, github_oauth_token) => {
     const connection = database.connection.getRepository(Users);
     const user = await connection.findOne({
-      where: { github_oauth_id, github_oauth_id },
+      where: { github_oauth_id },
     });
 
     user.github_oauth_token = github_oauth_token;
@@ -31,13 +31,13 @@ export const usersRepository = {
 
   getUser: async (id) => {
     const connection = database.connection.getRepository(Users);
-    return await connection.findOne({ where: { id: id } });
+    return await connection.findOne({ where: { id } });
   },
 
   getUserByGithubId: async (github_oauth_id) => {
     const connection = database.connection.getRepository(Users);
     return await connection.findOne({
-      where: { github_oauth_id: github_oauth_id },
+      where: { github_oauth_id },
     });
   },
 
@@ -55,7 +55,7 @@ export const usersRepository = {
   deleteUserByGithubId: async (github_oauth_id) => {
     const connection = database.connection.getRepository(Users);
     const deleteResult = await connection.delete({
-      github_oauth_id: github_oauth_id,
+      github_oauth_id,
     });
 
     if (deleteResult.affected == null || deleteResult.affected === 0) {
