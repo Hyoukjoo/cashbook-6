@@ -1,7 +1,11 @@
-import fetch from "node-fetch";
-
 import { usersRepository } from "../repositories/usersRepository.js";
 import config from "../config/index.js";
+
+import {
+  getGithubUser,
+  getGithubUserEmail,
+  getAccessToken,
+} from "../utils/githubOauth.js";
 
 export const usersController = {
   loginGithub: async (req, res, next) => {
@@ -84,49 +88,4 @@ export const usersController = {
 
 async function signupWithGithub(githubId, githubEmail) {
   await usersRepository.signup(githubEmail, githubId);
-}
-
-async function getGithubUserEmail(access_token) {
-  const req = await fetch("https://api.github.com/user/public_emails", {
-    method: "GET",
-    headers: {
-      Authorization: `token ${access_token}`,
-    },
-  });
-  const emailList = await req.json();
-  if (emailList == null || emailList.length === 0) return false;
-
-  for (const data of emailList) {
-    if (data.primary) return data.email;
-  }
-
-  return false;
-}
-
-async function getGithubUser(access_token) {
-  const req = await fetch("https://api.github.com/user", {
-    headers: {
-      Authorization: `bearer ${access_token}`,
-    },
-  });
-  const data = await req.json();
-  return data;
-}
-
-async function getAccessToken(code) {
-  const res = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      client_id: config.github_client_id,
-      client_secret: config.github_client_secret,
-      code: code,
-    }),
-  });
-  const data = await res.text();
-  const params = new URLSearchParams(data);
-
-  return params.get("access_token");
 }
