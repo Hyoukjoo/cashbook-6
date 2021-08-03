@@ -1,0 +1,53 @@
+button.save-button {
+  position: relative;
+  display: inline-block;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: var(--color-primary1);
+
+  &:disabled {
+    background-color: transparent;
+    border: 2px solid var(--color-primary1);
+
+    &::after {
+      border: solid var(--color-primary1);
+    }
+  }
+
+  &.small {
+    width: 20px;
+    height: 20px;
+
+    &::after {
+      width: 5px;
+      height: 10px;
+      left: 6px;
+      top: 2px;
+      border-width: 0 2px 2px 0;
+    }
+  }
+
+  &.large {
+    width: 40px;
+    height: 40px;
+
+    &::after {
+      width: 10px;
+      height: 20px;
+      left: 12px;
+      top: 4px;
+      border-width: 0 3px 3px 0;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    border: solid white;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+}
