@@ -1,0 +1,20 @@
+header.main {
+  position: sticky;
+  display: grid;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 194px;
+  background-color: var(--color-primary1);
+
+  & > section {
+    display: grid;
+    grid-template-columns: 1fr minmax(130px, 200px) 1fr;
+    justify-self: center;
+    align-items: center;
+    padding: 0 30px;
+    width: 100%;
+    max-width: var(--size-max-width);
+  }
+}
