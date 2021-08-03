@@ -1,0 +1,7 @@
+nav.header-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-self: right;
+  max-width: 140px;
+  width: 100%;
+}
