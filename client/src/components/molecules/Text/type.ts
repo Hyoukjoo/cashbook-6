@@ -22,3 +22,7 @@ export interface BodyTextProps extends TextProps {
 export interface BoldTextProps extends TextProps {
   size?: BoldTextSize;
 }
+
+export interface CategoryTagProps extends Omit<TextProps, "TextAtom"> {
+  color: string;
+}
