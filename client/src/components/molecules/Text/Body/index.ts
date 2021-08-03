@@ -6,6 +6,7 @@ const BodyText: Molecule<BodyTextProps> = ({
   text,
   size = "medium",
   TextAtom = P,
-}) => TextAtom("body-text", size)(text);
+  className,
+}) => TextAtom("body", size, className)(text);
 
 export default BodyText;
