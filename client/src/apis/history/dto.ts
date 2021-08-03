@@ -3,6 +3,11 @@ export interface Category {
   color: string;
 }
 
+export interface CategoryHistory extends Category {
+  rate: number;
+  total: number;
+}
+
 export enum HistoryType {
   INCOME = "INCOME",
   EXPENSE = "EXPENSE",

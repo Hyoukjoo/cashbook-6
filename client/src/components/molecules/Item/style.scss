@@ -1,0 +1,52 @@
+.history-item {
+  display: grid;
+  align-items: center;
+  border-bottom: 1px solid var(--color-line);
+
+  &:hover {
+    background-color: var(--color-background);
+  }
+
+  &.large {
+    grid-template-columns: auto 1fr 1fr auto;
+    padding: 0 10px;
+    height: 70px;
+
+    &:first-of-type {
+      border-top: 1px solid var(--color-line);
+    }
+
+    & > div.category-box {
+      padding-right: 10px;
+      width: 100%;
+    }
+
+    & > p.description {
+      color: var(--color-title-active);
+    }
+
+    & > p.payment {
+      color: var(--color-body);
+    }
+  }
+
+  &.small {
+    grid-template-columns: auto 1fr auto;
+    height: 62px;
+    padding: 0 16px;
+
+    & > div.category-box {
+      padding-right: 24px;
+      width: 100%;
+    }
+
+    & > p.rate {
+      justify-self: left;
+    }
+
+    & > p.total {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+}

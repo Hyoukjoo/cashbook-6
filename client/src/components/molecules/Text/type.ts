@@ -26,4 +26,4 @@ export interface BoldTextProps extends TextProps {
 
 export interface CategoryTagProps
   extends Category,
-    Omit<TextProps, "TextAtom"> {}
+    Pick<TextProps, "className"> {}
