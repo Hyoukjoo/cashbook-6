@@ -6,3 +6,8 @@ export interface LabelInputProps extends InputProps {
   className?: string;
   hasBoundary?: boolean;
 }
+
+export interface CheckBoxInputProps {
+  id?: string;
+  onClick?: (e: ClickEvent<HTMLInputElement>) => void;
+}
