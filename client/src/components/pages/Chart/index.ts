@@ -2,7 +2,8 @@ import { HistoryType } from "apis/history/dto";
 import Container from "molecules/Container";
 import CheckBoxInput from "molecules/Input/CheckBox";
 
-import Canvas from "../../canvas/index";
+import DonutChart from "../../canvas/donut-chart";
+import LineChart from "../../canvas/line-chart";
 
 // import LargeHistoryList from "molecules/List/LargeHistoryList";
 import SmallHistoryList from "molecules/List/SmallHistoryList";
@@ -66,10 +67,9 @@ const Chart: Page = (targetElement, state) => {
   const $canvasWrapper = document.createElement("div");
   $canvasWrapper.className = "canvas-wrapper";
 
-  const canvas = new Canvas();
-  console.log(canvas.$canvas);
+  const donutChart = new LineChart(396, 143);
 
-  $canvasWrapper.appendChild(canvas.$canvas);
+  $canvasWrapper.appendChild(donutChart.$canvas);
 
   const $list = SmallHistoryList({
     categoryHistories: categoryHistories
@@ -77,7 +77,7 @@ const Chart: Page = (targetElement, state) => {
 
   const $checkbox = CheckBoxInput({ id: "c1" });
 
-  const $container = Container($checkbox, $list, $canvasWrapper);
+  const $container = Container($checkbox, $canvasWrapper);
 
   $target.append($header, $container);
 
