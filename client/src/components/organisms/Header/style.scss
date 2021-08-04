@@ -7,6 +7,7 @@ header.main {
   width: 100vw;
   height: 194px;
   background-color: var(--color-primary1);
+  z-index: var(--z-index-header);
 
   & > section {
     display: grid;
