@@ -3,15 +3,17 @@ main {
   display: grid;
   justify-content: center;
   width: 100vw;
-  height: var(--size-container-height);
+  height: 100%;
   background-color: var(--color-background);
 
   & > section {
-    position: absolute;
-    top: -32px;
-    left: 50%;
+    position: relative;
     width: 850px;
     height: 100%;
-    transform: translateX(-50%);
+  }
+
+  &.history-template > section {
+    margin-top: 90px;
+    width: 904px;
   }
 }
