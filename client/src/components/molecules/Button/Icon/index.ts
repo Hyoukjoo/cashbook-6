@@ -1,7 +1,9 @@
+import "./style.scss";
+
 import Button from "atoms/Button";
 import Icon from "atoms/Icon";
 import { Molecule } from "molecules/type";
-import { IconButtonProps } from "./type";
+import { IconButtonProps } from "../type";
 
 const IconButton: Molecule<IconButtonProps, HTMLButtonElement> = ({
   svg,
