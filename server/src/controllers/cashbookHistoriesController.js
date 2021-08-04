@@ -32,7 +32,17 @@ export const cashbookHistoriesController = {
   },
 
   getCashbookHistories: async (req, res, next) => {
-    const cashbook = await cashbookHistoriesRepository.getCashbookHistories();
+    const year = req.body.year;
+    const month = req.body.month;
+    let cashbook;
+    if (year == null || month == null) {
+      cashbook = await cashbookHistoriesRepository.getCashbookHistories();
+    } else {
+      cashbook = await cashbookHistoriesRepository.getCashbookHistories({
+        year,
+        month,
+      });
+    }
     console.log(cashbook);
     res.json({ cashbook });
   },
