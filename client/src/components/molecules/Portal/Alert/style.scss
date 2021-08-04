@@ -1,0 +1,46 @@
+div.alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "content content"
+    "cancel confirm";
+
+  padding: 40px;
+  width: 400px;
+  border-radius: 10px;
+  background-color: var(--color-off-white);
+
+  transform: translate(-50%, -50%);
+
+  & > .title {
+    grid-area: title;
+    margin: 0;
+    margin-bottom: 24px;
+  }
+
+  & > .content {
+    grid-area: content;
+    margin-bottom: 40px;
+  }
+
+  & > .cancel {
+    grid-area: cancel;
+    justify-self: left;
+  }
+
+  & > .confirm {
+    grid-area: confirm;
+    justify-self: right;
+
+    & > p {
+      font-weight: 500;
+    }
+  }
+
+  & label {
+    color: var(--color-title-active);
+  }
+}

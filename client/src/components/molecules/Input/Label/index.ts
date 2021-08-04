@@ -1,7 +1,7 @@
 import "./style.scss";
 
 import Div from "atoms/Div";
-import { LabelInputProps } from "./type";
+import { LabelInputProps } from "../type";
 import { Molecule } from "molecules/type";
 import Label from "atoms/Label";
 

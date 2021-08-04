@@ -6,8 +6,15 @@ export const createElement = <T extends HTMLElement>(
   is?: string
 ) => {
   const $ = document.createElement(element, { is });
-  classNames = classNames.filter((className) => className !== "undefined");
-  $.classList.add(...classNames);
+
+  classNames = classNames.filter(
+    (className) => !className || className !== "undefined"
+  );
+
+  if (classNames.length > 0) {
+    $.classList.add(...classNames);
+  }
+
   return <T>$;
 };
 
@@ -36,6 +43,10 @@ export const button = (...classNames: ClassName[]) =>
   createElement<HTMLButtonElement>("button", classNames);
 export const input = (...classNames: ClassName[]) =>
   createElement<HTMLInputElement>("input", classNames);
+export const select = (...classNames: ClassName[]) =>
+  createElement<HTMLSelectElement>("select", classNames);
+export const option = (...classNames: ClassName[]) =>
+  createElement<HTMLOptionElement>("option", classNames);
 
 export const div = (...classNames: ClassName[]) =>
   createElement<HTMLDivElement>("div", classNames);
