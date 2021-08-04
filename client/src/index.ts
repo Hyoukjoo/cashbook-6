@@ -64,9 +64,7 @@ const init = () => {
     isLoading: false,
   };
 
-  registry.add("/", History);
-  registry.add("/calendar", Calendar);
-  registry.add("/chart", Chart);
+  registry.set(routes);
 
   const state = createStore(initialState);
 
