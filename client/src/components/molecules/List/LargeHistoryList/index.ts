@@ -12,7 +12,7 @@ import { LargeHistoryListProps } from "../type";
 import { formatToCurrency } from "utils/number";
 import { div } from "atoms/Base";
 
-const filterExpense = ({ type }: History) => type === HistoryType.EXPENSE;
+const filterExpense = ({ type }: History) => type === HistoryType.OUTCOME;
 const filterIncome = ({ type }: History) => type === HistoryType.INCOME;
 const sum = (acc: number, { amount }: History) => acc + amount;
 
