@@ -1,7 +1,7 @@
 import { Atom } from "../type";
 import { div } from "atoms/Base";
 
-const Div: Atom<HTMLElement, HTMLDivElement> =
+const Div: Atom<Element, HTMLDivElement> =
   (...classNames) =>
   (...elements) => {
     const $div = div(...classNames);
