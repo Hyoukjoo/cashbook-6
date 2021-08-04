@@ -14,4 +14,8 @@ main {
     height: 100%;
     transform: translateX(-50%);
   }
+
+  &.history > section {
+    width: 904px;
+  }
 }

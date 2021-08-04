@@ -1,0 +1,18 @@
+div.amount-input-box {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  & > input {
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: right;
+    padding-right: 8px;
+  }
+
+  & > p {
+    margin-block-start: 0;
+    margin-block-end: 4px;
+  }
+}

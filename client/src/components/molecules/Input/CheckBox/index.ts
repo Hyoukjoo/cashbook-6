@@ -4,7 +4,7 @@ import Div from "atoms/Div";
 import Input from "atoms/Input";
 import Label from "atoms/Label";
 import { Molecule } from "molecules/type";
-import { CheckBoxInputProps } from "../Label/type";
+import { CheckBoxInputProps } from "../type";
 
 const CheckBoxInput: Molecule<CheckBoxInputProps, HTMLDivElement> = ({
   id = "check",
