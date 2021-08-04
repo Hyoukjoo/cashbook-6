@@ -29,6 +29,10 @@ export default class EasyDraw {
     this.ctx.stroke();
   }
 
+  drawCircle(radius) {
+    this.ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+  }
+
   arc(x, y, radius, startAngle, endAngle, anticlockwise) {
     this.ctx.arc(
       x,
@@ -49,6 +53,12 @@ export default class EasyDraw {
     this.y += Math.sin((Math.PI * this.angle) / 180) * dist;
 
     this.ctx.lineTo(this.x, this.y);
+  }
+
+  lineTo(x, y) {
+    this.ctx.lineTo(x, y);
+    this.x = x;
+    this.y = y;
   }
 
   rotate(angle) {
