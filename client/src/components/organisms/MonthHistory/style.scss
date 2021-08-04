@@ -1,0 +1,21 @@
+.month-history-container {
+  & > ul {
+    margin-bottom: 12px;
+  }
+
+  & > div.month-history-summary {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, auto);
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+
+    & > div.checkbox-container {
+      display: inherit;
+    }
+
+    & > p {
+      color: var(--color-primary3);
+    }
+  }
+}

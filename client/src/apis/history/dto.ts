@@ -10,7 +10,7 @@ export interface CategoryHistory extends Category {
 
 export enum HistoryType {
   INCOME = "INCOME",
-  EXPENSE = "EXPENSE",
+  OUTCOME = "OUTCOME",
 }
 
 export interface History {
@@ -20,4 +20,9 @@ export interface History {
   description: string;
   payment: string;
   amount: number;
+}
+
+export interface DateHistory {
+  date: Date;
+  histories: History[];
 }
