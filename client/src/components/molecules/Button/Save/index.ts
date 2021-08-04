@@ -1,7 +1,7 @@
 import "./style.scss";
 
 import { Molecule } from "molecules/type";
-import { SaveButtonProps } from "./type";
+import { SaveButtonProps } from "../type";
 import { CustomHTMLElement } from "commons/type/html";
 import Button from "atoms/Button";
 
