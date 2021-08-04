@@ -3,7 +3,6 @@ import { Atom } from "atoms/type";
 export type HtmlTextElement =
   | HTMLHeadingElement
   | HTMLParagraphElement
-  | HTMLSpanElement
-  | HTMLLabelElement;
+  | HTMLSpanElement;
 
 export type TextAtom = Atom<string | number, HtmlTextElement>;

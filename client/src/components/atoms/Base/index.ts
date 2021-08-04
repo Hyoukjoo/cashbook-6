@@ -27,9 +27,9 @@ export const p = (...classNames: ClassName[]) =>
   createElement<HTMLParagraphElement>("p", classNames);
 export const span = (...classNames: ClassName[]) =>
   createElement<HTMLSpanElement>("span", classNames);
+
 export const label = (...classNames: ClassName[]) =>
   createElement<HTMLLabelElement>("label", classNames);
-
 export const a = (...classNames: ClassName[]) =>
   createElement<HTMLAnchorElement>("a", classNames);
 export const button = (...classNames: ClassName[]) =>
