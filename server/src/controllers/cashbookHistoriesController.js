@@ -2,7 +2,6 @@ import { cashbookHistoriesRepository } from "../repositories/cashbookHistoriesRe
 import { usersRepository } from "../repositories/UsersRepository.js";
 import { categoriesRepository } from "../repositories/categoriesRepository.js";
 import { payMethodsRepository } from "../repositories/payMethodsRepository.js";
-import cashbookHistoriesRouter from "../routes/cashbookHistoriesRouter.js";
 
 export const cashbookHistoriesController = {
   add: async (req, res, next) => {
@@ -43,8 +42,40 @@ export const cashbookHistoriesController = {
         month,
       });
     }
-    console.log(cashbook);
+
     res.json({ cashbook });
+  },
+
+  updateCashbook: async (req, res, next) => {
+    const cashbookId = req.body.id;
+    const newCashbookData = req.body.data;
+
+    if (newCashbookData.userId != null) {
+      const user = await usersRepository.getUser(newCashbookData.userId);
+      newCashbookData.user = user;
+      delete newCashbookData.userId;
+    }
+    if (newCashbookData.categoryId != null) {
+      const category = await categoriesRepository.getCategoryById(
+        newCashbookData.categoryId
+      );
+      newCashbookData.category = category;
+      delete newCashbookData.categoryId;
+    }
+    if (newCashbookData.payMethodId != null) {
+      const payMethod = await payMethodsRepository.getPayMethodById(
+        newCashbookData.payMethodId
+      );
+      newCashbookData.payMethod = payMethod;
+      delete newCashbookData.payMethodId;
+    }
+
+    await cashbookHistoriesRepository.updateCashbook(
+      cashbookId,
+      newCashbookData
+    );
+
+    res.json("update");
   },
 
   deleteCashbook: async (req, res, next) => {

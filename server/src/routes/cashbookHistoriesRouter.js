@@ -7,6 +7,7 @@ cashbookHistoriesRouter.get(
   "/all",
   cashbookHistoriesController.getCashbookHistories
 );
+cashbookHistoriesRouter.put("/", cashbookHistoriesController.updateCashbook);
 cashbookHistoriesRouter.post("/", cashbookHistoriesController.add);
 cashbookHistoriesRouter.delete(
   "/:id",

@@ -46,6 +46,20 @@ export const cashbookHistoriesRepository = {
     return cashbook;
   },
 
+  updateCashbook: async (cashbookId, newCashbookData) => {
+    const connection = database.connection.getRepository(CashbookHistories);
+    const cashbook = await connection.findOne({
+      where: { id: cashbookId },
+      relations: ["user", "category", "payMethod"],
+    });
+
+    connection.save(Object.assign(cashbook, newCashbookData));
+  },
+
+  getCashbookById: async (cashbookId) => {
+    const connection = database.connection.getRepository(CashbookHistories);
+  },
+
   deleteCashbook: async (cashbookId) => {
     const connection = database.connection.getRepository(CashbookHistories);
     const deleteResult = await connection.delete({
