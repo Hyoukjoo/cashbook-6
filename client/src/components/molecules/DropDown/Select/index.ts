@@ -11,6 +11,7 @@ import Ul from "atoms/Ul";
 import DropdwonOption from "molecules/DropDown/Option";
 
 const Dropdown: Molecule<DropdownProps> = ({
+  defaultOption,
   placeholder = "선택하세요",
   options = [],
   onChangeOption,
@@ -28,7 +29,11 @@ const Dropdown: Molecule<DropdownProps> = ({
 
   const $select = Div("dropdown-select")($placeholder, $downArrowIcon, $list);
 
-  $select.dataset.value = "";
+  if (defaultOption) {
+    $placeholder.textContent = defaultOption;
+  }
+
+  $select.dataset.value = defaultOption || "";
 
   $select.addEventListener("click", (e: ClickEvent<HTMLDivElement>) => {
     const $target = e.target.closest("li.dropdown-option") as HTMLElement;

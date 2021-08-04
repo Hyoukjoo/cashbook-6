@@ -5,6 +5,7 @@ export interface DropdownOptionProps {
 }
 
 export interface DropdownProps {
+  defaultOption: string;
   placeholder?: string;
   options?: DropdownOptionProps[];
   onChangeOption?: (option: string) => void;
