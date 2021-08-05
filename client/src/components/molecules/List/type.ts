@@ -1,7 +1,8 @@
-import { CategoryHistory, DateHistory } from "apis/history/dto";
+import { CategoryHistoryDto } from "apis/history/dto";
+import DayHistory from "src/models/DayHistory";
 
-export interface LargeHistoryListProps extends DateHistory {}
+export interface LargeHistoryListProps extends DayHistory {}
 
 export interface SmallHistoryListProps {
-  categoryHistories: CategoryHistory[];
+  categoryHistories: CategoryHistoryDto[];
 }

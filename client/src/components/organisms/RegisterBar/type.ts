@@ -1,10 +1,12 @@
 import { DropdownOptionProps } from "molecules/DropDown/type";
+import Category from "src/models/Category";
+import Payment from "src/models/Payment";
 
 export interface RegisterInfo {
   date: Date;
-  category: string;
+  category: Category;
   description: string;
-  payment: string;
+  payment: Payment;
   amount: number;
 }
 

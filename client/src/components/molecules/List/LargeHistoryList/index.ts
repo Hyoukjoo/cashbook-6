@@ -1,6 +1,6 @@
 import "../style.scss";
 
-import { History, HistoryType } from "apis/history/dto";
+import { HistoryType } from "apis/history/dto";
 import Div from "atoms/Div";
 import { P } from "atoms/Text";
 import Ul from "atoms/Ul";
@@ -11,6 +11,7 @@ import { getWeek } from "utils/date";
 import { LargeHistoryListProps } from "../type";
 import { formatToCurrency } from "utils/number";
 import { div } from "atoms/Base";
+import History from "models/History";
 
 const filterExpense = ({ type }: History) => type === HistoryType.OUTCOME;
 const filterIncome = ({ type }: History) => type === HistoryType.INCOME;

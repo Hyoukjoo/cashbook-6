@@ -1,5 +1,6 @@
-import { CategoryHistory, History } from "apis/history/dto";
+import { CategoryHistoryDto } from "apis/history/dto";
+import History from "models/History";
 
 export interface LargeHistoryItemProps extends History {}
 
-export interface SmallHistoryItemProps extends CategoryHistory {}
+export interface SmallHistoryItemProps extends CategoryHistoryDto {}
