@@ -1,0 +1,10 @@
+main.history-template {
+  & div.register-bar-container {
+    position: fixed;
+    top: 162px;
+    left: 50%;
+    width: 904px;
+    margin-bottom: 48px;
+    transform: translateX(-50%);
+  }
+}

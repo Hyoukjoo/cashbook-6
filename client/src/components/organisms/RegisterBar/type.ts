@@ -1,4 +1,4 @@
-import { DropdownOptionProps } from "molecules/Option/Dropdown/type";
+import { DropdownOptionProps } from "molecules/DropDown/type";
 
 export interface RegisterInfo {
   date: Date;
@@ -40,9 +40,9 @@ export interface AmountInputProps {
 }
 
 export interface RegisterBarProps {
-  categories: string[];
-  payments: string[];
-  registerInfo: Partial<RegisterInfo>;
-  onChangeRegisterInfo: (registerInfo: RegisterInfo) => void;
-  onClickSaveButton: () => void;
+  categories: DropdownOptionProps[];
+  payments: DropdownOptionProps[];
+  registerInfo?: Partial<RegisterInfo>;
+  onChangeRegisterInfo?: (registerInfo: RegisterInfo) => void;
+  onClickSaveButton?: () => void;
 }

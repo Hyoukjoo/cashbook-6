@@ -6,7 +6,9 @@ const Label: Atom<LabelProps, HTMLLabelElement> =
   (...classNames) =>
   ({ text = "", htmlFor }) => {
     const $label = label(...classNames);
-    $label.htmlFor = htmlFor;
+    if (htmlFor) {
+      $label.htmlFor = htmlFor;
+    }
     $label.textContent = text;
     return $label;
   };
