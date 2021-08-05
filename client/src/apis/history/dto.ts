@@ -1,11 +1,17 @@
-export interface Category {
+export interface CategoryDto {
+  id: number;
   name: string;
   color: string;
 }
 
-export interface CategoryHistory extends Category {
+export interface CategoryHistoryDto extends CategoryDto {
   rate: number;
   total: number;
+}
+
+export interface PaymentDto {
+  id: number;
+  name: string;
 }
 
 export enum HistoryType {
@@ -13,16 +19,24 @@ export enum HistoryType {
   OUTCOME = "OUTCOME",
 }
 
-export interface History {
-  category: Category;
-  date: Date;
+export interface HistoryDto {
+  id: number;
+  date: string;
   type: HistoryType;
   description: string;
-  payment: string;
   amount: number;
+  category: CategoryDto;
+  payment: PaymentDto;
 }
 
-export interface DateHistory {
+export interface DayHistoryDto {
   date: Date;
-  histories: History[];
+  histories: HistoryDto[];
+}
+
+export interface HistoryPageInfoDto {
+  date: string;
+  categories: CategoryDto[];
+  payments: PaymentDto[];
+  histories: DayHistoryDto[];
 }
