@@ -16,8 +16,8 @@
     "directory": "client"
   },
   "scripts": {
-    "dev": "parcel src/index.html --no-cache",
-    "build": "parcel src/index.ts",
+    "dev": "parcel src/index.html --no-cache --global gisMap",
+    "build": "parcel src/index.html",
     "start": "nodemon dist/server.js"
   },
   "dependencies": {
@@ -40,8 +40,9 @@
     "molecules": "./src/components/molecules/",
     "organisms": "./src/components/organisms/",
     "templates": "./src/components/templates/",
-    "pages": "./src/components/pages",
+    "pages": "./src/components/pages/",
     "apis": "./src/apis/",
+    "models": "./src/models/",
     "utils": "./src/utils/",
     "lib": "./src/lib/",
     "config": "./config/"

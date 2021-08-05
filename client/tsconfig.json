@@ -17,6 +17,7 @@
       "templates/*": ["src/components/templates/*"],
       "pages/*": ["src/components/pages/*"],
       "apis/*": ["src/apis/*"],
+      "models/*": ["src/models/*"],
       "utils/*": ["src/utils/*"],
       "lib/*": ["src/lib/*"],
       "config/*": ["config/*"]
