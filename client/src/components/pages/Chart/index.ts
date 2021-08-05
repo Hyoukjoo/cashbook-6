@@ -1,14 +1,14 @@
 import Container from "molecules/Container";
 import CheckBoxInput from "molecules/Input/CheckBox";
 import { Page } from "pages/type";
-import Layout from "pages/Layout";
+import HeaderLayout from "pages/Layout";
 import { HistoryType } from "apis/history/dto";
 // import LargeHistoryItem from "molecules/Item/LargeHistoryItem";
 // import SmallHistoryItem from "molecules/Item/SmallHistoryItem";
 // import LargeHistoryList from "molecules/List/LargeHistoryList";
 // import SmallHistoryList from "molecules/List/SmallHistoryList";
 
-const Chart: Page = (targetElement, state) => {
+const Chart: Page = async (targetElement, state) => {
   const $target = targetElement.cloneNode(true) as HTMLElement;
 
   // const $$ = SmallHistoryItem({
@@ -78,4 +78,4 @@ const Chart: Page = (targetElement, state) => {
   return $target;
 };
 
-export default Layout(Chart);
+export default HeaderLayout(Chart);

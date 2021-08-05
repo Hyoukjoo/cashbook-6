@@ -1,15 +1,18 @@
 import { Page } from "pages/type";
 import HistoryTemplate from "templates/History";
-import Layout from "pages/Layout";
+import HeaderLayout from "pages/Layout";
+import { requestLoadMonthHistory } from "apis/history/remotes";
 
-const History: Page = (targetElement, state) => {
+const HistoryPage: Page = async (targetElement, state) => {
   const $target = targetElement.cloneNode(true) as HTMLElement;
 
-  const $template = HistoryTemplate();
+  const historyPageInfo = await requestLoadMonthHistory(state.date);
+
+  const $template = HistoryTemplate(historyPageInfo);
 
   $target.append($template);
 
   return $target;
 };
 
-export default Layout(History);
+export default HeaderLayout(HistoryPage);

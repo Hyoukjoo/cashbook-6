@@ -3,60 +3,82 @@ import "./style.scss";
 import Div from "atoms/Div";
 import LargeHistoryList from "molecules/List/LargeHistoryList";
 import { Organism } from "organisms/type";
-import { HistoryListProps } from "./type";
-import { BodyText } from "molecules/Text";
-import { P } from "atoms/Text";
-import { DateHistory, History, HistoryType } from "apis/history/dto";
-import { formatToCurrency } from "utils/number";
-import CheckBoxInput from "molecules/Input/CheckBox";
+import { MonthHistoryProps } from "./type";
+import { HistoryType } from "apis/history/dto";
+import DayHistory from "models/DayHistory";
+import MonthHistorySummary from "./Summary";
 
-const sumCount = (acc: number, { histories }: DateHistory) =>
-  acc + histories.length;
+const MonthHistory: Organism<MonthHistoryProps> = ({ dayHistories = [] }) => {
+  const onClickCheckbox = (e: ClickEvent<HTMLInputElement>) => {
+    if (e.target.matches("input[type=checkbox]")) {
+      const $incomeCheckbox = e.target
+        .closest(".month-history-container")
+        .querySelector<HTMLInputElement>("#income-checkbox");
+      const $outcomeCheckbox = e.target
+        .closest(".month-history-container")
+        .querySelector<HTMLInputElement>("#outcome-checkbox");
 
-const flatHistory = (type: HistoryType) => (dateHistories: DateHistory[]) =>
-  dateHistories.reduce<History[]>(
-    (acc, { histories }) =>
-      acc.concat(histories.filter((history) => history.type === type)),
-    []
-  );
+      let $summary;
+      let $list;
 
-const sumAmount = (acc: number, { amount }: History) => acc + amount;
+      const isBothChecked = $incomeCheckbox.checked && $outcomeCheckbox.checked;
+      const isOnlyIncomeChecked =
+        $incomeCheckbox.checked && !$outcomeCheckbox.checked;
+      const isOnlyOutcomeChecked =
+        !$incomeCheckbox.checked && $outcomeCheckbox.checked;
+      const isBothUnChecked =
+        !$incomeCheckbox.checked && !$outcomeCheckbox.checked;
 
-const MonthHistory: Organism<HistoryListProps> = ({ dateHistories = [] }) => {
-  const totalCount = dateHistories.reduce(sumCount, 0);
-  const incomeHistories = flatHistory(HistoryType.INCOME)(dateHistories);
-  const outcomeHistories = flatHistory(HistoryType.OUTCOME)(dateHistories);
+      if (isBothChecked) {
+        $summary = MonthHistorySummary({ dayHistories, onClickCheckbox });
+        $list = dayHistories.map(LargeHistoryList);
+      } else if (isOnlyIncomeChecked) {
+        const incomeDayHistories = dayHistories
+          .map(DayHistory.filterDayHistoryByHistoryType(HistoryType.INCOME))
+          .filter(Boolean);
 
-  const totalIncome = formatToCurrency(incomeHistories.reduce(sumAmount, 0));
-  const totalOutcome = formatToCurrency(outcomeHistories.reduce(sumAmount, 0));
+        $summary = MonthHistorySummary({
+          dayHistories: incomeDayHistories,
+          onClickCheckbox,
+          isOutcomeChecked: false,
+        });
+        $list = incomeDayHistories.map(LargeHistoryList);
+      } else if (isOnlyOutcomeChecked) {
+        const outcomeDayHistories = dayHistories
+          .map(DayHistory.filterDayHistoryByHistoryType(HistoryType.OUTCOME))
+          .filter(Boolean);
 
-  const $incomeCheckbox = CheckBoxInput({ id: "income-checkbox" });
-  const $outcomeCheckbox = CheckBoxInput({ id: "outcome-checkbox" });
+        $summary = MonthHistorySummary({
+          dayHistories: outcomeDayHistories,
+          onClickCheckbox,
+          isIncomeChecked: false,
+        });
+        $list = outcomeDayHistories.map(LargeHistoryList);
+      } else if (isBothUnChecked) {
+        $summary = MonthHistorySummary({
+          dayHistories: [],
+          isIncomeChecked: false,
+          isOutcomeChecked: false,
+          onClickCheckbox,
+        });
+        $list = [];
+      }
 
-  const $totalCount = BodyText({
-    TextAtom: P,
-    text: `전체 내역 ${totalCount}건`,
+      const $oldContainer = document.querySelector(".month-history-container");
+      const $newContainer = Div("month-history-container")($summary, ...$list);
+
+      $oldContainer.replaceWith($newContainer);
+    }
+  };
+
+  const $summary = MonthHistorySummary({ dayHistories, onClickCheckbox });
+  const $list = dayHistories.map(LargeHistoryList);
+
+  Array.from($summary.children).forEach(($) => {
+    if ($.matches("div.checkbox-container")) {
+      $.lastElementChild.addEventListener("click", onClickCheckbox);
+    }
   });
-
-  const $totalIncome = BodyText({
-    TextAtom: P,
-    text: `수입 ${totalIncome}`,
-  });
-
-  const $totalOutcome = BodyText({
-    TextAtom: P,
-    text: `지출 ${totalOutcome}`,
-  });
-
-  const $summary = Div("month-history-summary")(
-    $totalCount,
-    $incomeCheckbox,
-    $totalIncome,
-    $outcomeCheckbox,
-    $totalOutcome
-  );
-
-  const $list = dateHistories.map(LargeHistoryList);
 
   const $container = Div("month-history-container")($summary, ...$list);
 

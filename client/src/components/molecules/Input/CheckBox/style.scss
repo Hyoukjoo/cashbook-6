@@ -8,7 +8,8 @@ div.checkbox-container {
       display: inline-block;
       width: 20px;
       height: 20px;
-      background-color: var(--color-primary1);
+      background-color: var(--color-white);
+      border: 2px solid var(--color-label);
       border-radius: 5px;
 
       &::after {
@@ -18,8 +19,6 @@ div.checkbox-container {
         left: 6px;
         width: 5px;
         height: 10px;
-        border: solid var(--color-white);
-        border-width: 0 2px 2px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
@@ -29,11 +28,12 @@ div.checkbox-container {
 
     &:checked {
       & + label {
-        border: 2px solid var(--color-label);
-        background-color: var(--color-white);
+        background-color: var(--color-primary1);
+        border: none;
 
         &::after {
-          border: none;
+          border: solid var(--color-white);
+          border-width: 0 2px 2px 0;
         }
       }
     }

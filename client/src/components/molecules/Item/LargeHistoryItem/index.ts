@@ -27,7 +27,7 @@ const LargeHistoryItem: Molecule<LargeHistoryItemProps, HTMLLIElement> = ({
   });
   const $payment = BodyText({
     TextAtom: P,
-    text: payment,
+    text: payment.name,
     size: "medium",
     className: "payment",
   });

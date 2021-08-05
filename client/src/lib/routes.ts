@@ -2,7 +2,7 @@ import { Page } from "pages/type";
 
 import Calendar from "pages/Calendar";
 import Chart from "pages/Chart";
-import History from "pages/History";
+import HistoryPage from "pages/History";
 
 export type Route = {
   path: string;
@@ -12,7 +12,7 @@ export type Route = {
 export type Routes = Route[];
 
 const routes: Routes = [
-  { path: "/", page: History },
+  { path: "/", page: HistoryPage },
   { path: "/calendar", page: Calendar },
   { path: "/chart", page: Chart },
 ];

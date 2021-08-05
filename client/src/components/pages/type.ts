@@ -1,3 +1,6 @@
 import { State } from "lib/state";
 
-export type Page = (targetElement: HTMLElement, state: State) => HTMLElement;
+export type Page = (
+  targetElement: HTMLElement,
+  state: State
+) => Promise<HTMLElement>;

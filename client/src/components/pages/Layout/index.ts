@@ -2,58 +2,70 @@ import { State } from "lib/state";
 import Header from "organisms/Header";
 import { Page } from "pages/type";
 
-const Layout = (page: Page) => (targetElement: HTMLElement, state: State) => {
-  const goNextMonth = (date: Date) => {
-    state.date = date;
+const HeaderLayout: Layout =
+  (page: Page) => async (targetElement: HTMLElement, state: State) => {
+    const goNextMonth = (date: Date) => {
+      state.date = date;
+    };
+
+    const goLastMonth = (date: Date) => {
+      state.date = date;
+    };
+
+    const onClickNavButton = (href: string) => {
+      state.currentPath = href;
+    };
+
+    const $header = Header({
+      date: state.date,
+      currentPath: state.currentPath,
+      goLastMonth,
+      goNextMonth,
+      onClickNavButton,
+    });
+
+    const $page = await page(targetElement, state);
+
+    $page.prepend($header);
+
+    return $page;
   };
 
-  const goLastMonth = (date: Date) => {
-    state.date = date;
-  };
+export default HeaderLayout;
 
-  const onClickNavButton = (href: string) => {
-    state.currentPath = href;
-  };
-
-  const $header = Header({
-    date: state.date,
-    currentPath: state.currentPath,
-    goLastMonth,
-    goNextMonth,
-    onClickNavButton,
-  });
-
-  const $page = page(targetElement, state);
-
-  $page.prepend($header);
-
-  return $page;
-
-  // const goNextMonth = (date: Date) => {
-  // $layout.dataset.date = date.toString();
-  // };
-
-  // const goLastMonth = (date: Date) => {
-  // $layout.dataset.date = date.toString();
-  // };
-
-  // const renderHeader = (date: Date, currentPath: string) =>
-  //   Header({
-  //     date,
-  //     goLastMonth,
-  //     goNextMonth,
-  //     currentPath,
-  //   });
-
-  // const $layout = new LayoutElement({
-  //   renderHeader,
-  //   currentPath: state.currentPath,
-  //   date: state.date,
-  // });
-};
+//
+//
+//
+// 테스트 코드
 
 import { CustomHTMLElement } from "commons/type/html";
 import applyDiff from "lib/applyDiff";
+import { Layout } from "./type";
+
+// const HeaderLayout: Layout =
+//   (page: Page) => async (targetElement: HTMLElement, state: State) => {
+// const goNextMonth = (date: Date) => {
+// $layout.dataset.date = date.toString();
+// };
+
+// const goLastMonth = (date: Date) => {
+// $layout.dataset.date = date.toString();
+// };
+
+// const renderHeader = (date: Date, currentPath: string) =>
+//   Header({
+//     date,
+//     goLastMonth,
+//     goNextMonth,
+//     currentPath,
+//   });
+
+// const $layout = new LayoutElement({
+//   renderHeader,
+//   currentPath: state.currentPath,
+//   date: state.date,
+// });
+// };
 
 class LayoutElement extends HTMLElement implements CustomHTMLElement {
   $header: HTMLElement;
@@ -108,5 +120,3 @@ class LayoutElement extends HTMLElement implements CustomHTMLElement {
 }
 
 customElements.define("layout-element", LayoutElement);
-
-export default Layout;

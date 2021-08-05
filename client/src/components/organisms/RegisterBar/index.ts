@@ -20,8 +20,8 @@ const RegisterBar: Organism<RegisterBarProps> = ({
   const {
     date = new Date(),
     description = "",
-    category = "",
-    payment = "",
+    category,
+    payment,
     amount = 0,
   } = registerInfo;
 
@@ -43,7 +43,7 @@ const RegisterBar: Organism<RegisterBarProps> = ({
 
   const $calendarInput = CalendarInput({ date, onChangeDate });
   const $categoryInput = CategoryInput({
-    defaultCategory: category,
+    defaultCategory: category?.name,
     categories,
     onChangeCategory,
   });
@@ -52,7 +52,7 @@ const RegisterBar: Organism<RegisterBarProps> = ({
     onChangeDescription,
   });
   const $paymentInput = PaymentInput({
-    defaultPayment: payment,
+    defaultPayment: payment?.name,
     payments,
     onChangePayment,
   });

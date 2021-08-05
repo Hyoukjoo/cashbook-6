@@ -1,8 +1,8 @@
 import { H } from "atoms/Text";
 import { Page } from "pages/type";
-import Layout from "pages/Layout";
+import HeaderLayout from "pages/Layout";
 
-const Calendar: Page = (targetElement, state) => {
+const Calendar: Page = async (targetElement, state) => {
   const $target = targetElement.cloneNode(true) as HTMLElement;
 
   const $template = H[1]()("Calendar");
@@ -12,4 +12,4 @@ const Calendar: Page = (targetElement, state) => {
   return $target;
 };
 
-export default Layout(Calendar);
+export default HeaderLayout(Calendar);

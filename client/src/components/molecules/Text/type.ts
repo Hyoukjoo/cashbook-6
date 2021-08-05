@@ -1,6 +1,6 @@
-import { Category } from "apis/history/dto";
 import { TextAtom } from "atoms/Text/type";
 import { ClassName } from "commons/type/common";
+import Category from "src/models/Category";
 
 export type DisplayTextSize = "large" | "small";
 export type BodyTextSize = "large" | "medium" | "regular";
