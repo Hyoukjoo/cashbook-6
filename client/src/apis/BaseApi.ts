@@ -9,6 +9,7 @@ export default class BaseApi {
 
     this.instance = axios.create({
       baseURL: url.href,
+      validateStatus: (status) => 200 <= status && status < 300,
     });
   }
 
