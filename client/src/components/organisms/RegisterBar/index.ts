@@ -11,28 +11,34 @@ import AmountInput from "./AmountInput";
 import { RegisterBarProps } from "./type";
 
 const RegisterBar: Organism<RegisterBarProps> = ({
-  registerInfo,
+  registerInfo = {},
   categories,
   payments,
   onChangeRegisterInfo,
   onClickSaveButton,
 }) => {
-  const { date, description, category, payment, amount } = registerInfo;
+  const {
+    date = new Date(),
+    description = "",
+    category = "",
+    payment = "",
+    amount = 0,
+  } = registerInfo;
 
   const onChangeDate = ({ date }) => {
-    onChangeRegisterInfo({ ...registerInfo, ...date });
+    onChangeRegisterInfo?.({ ...registerInfo, ...date });
   };
   const onChangeCategory = ({ category }) => {
-    onChangeRegisterInfo({ ...registerInfo, ...category });
+    onChangeRegisterInfo?.({ ...registerInfo, ...category });
   };
   const onChangeDescription = ({ description }) => {
-    onChangeRegisterInfo({ ...registerInfo, ...description });
+    onChangeRegisterInfo?.({ ...registerInfo, ...description });
   };
   const onChangePayment = ({ payment }) => {
-    onChangeRegisterInfo({ ...registerInfo, ...payment });
+    onChangeRegisterInfo?.({ ...registerInfo, ...payment });
   };
   const onChangeAmount = ({ amount }) => {
-    onChangeRegisterInfo({ ...registerInfo, ...amount });
+    onChangeRegisterInfo?.({ ...registerInfo, ...amount });
   };
 
   const $calendarInput = CalendarInput({ date, onChangeDate });
