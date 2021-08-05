@@ -1,5 +1,11 @@
-import { DateHistory } from "apis/history/dto";
+import DayHistory from "src/models/DayHistory";
 
-export interface HistoryListProps {
-  dateHistories: DateHistory[];
+export interface MonthHistoryProps {
+  dayHistories: DayHistory[];
+}
+
+export interface MonthHistorySummaryProps extends MonthHistoryProps {
+  onClickCheckbox?: (e: ClickEvent<HTMLInputElement>) => void;
+  isIncomeChecked?: boolean;
+  isOutcomeChecked?: boolean;
 }
